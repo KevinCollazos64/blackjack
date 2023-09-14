@@ -5,13 +5,12 @@ from deck import Deck
 class Game:
 
     def __init__(self):
-        print("------------------Feeling Lucky? Test your luck against the dealer!---------------------- ")
         self.deck = Deck()  # implement so that it shuffles deck on initialization
         self.deck.shuffle()
         self._dealer = Player()
         self._player = Player(ishuman=True)
         self._stake = 0
-        print(f'Your HP: {self.player.HP}  Dealer HP: {self.dealer.HP}')
+
 
     @property
     def dealer(self):
@@ -211,6 +210,9 @@ class Game:
     def newround(self):
         self.player.hand = []
         self.dealer.hand = []
+        print(
+            "------------------Feeling Lucky? Test your luck against the dealer!---------------------- ")  # move later
+        print(f'Your HP: {self.player.HP}  Dealer HP: {self.dealer.HP}')  # move to newround
 
         while self.player.HP > 0 and self.dealer.HP > 0:
             # ask player for stakes
@@ -288,8 +290,7 @@ class Game:
                                     elif ord(restart) == ord('y') or ord(restart) == ord('Y'):
                                         self.player.HP = 100
                                         self.dealer.HP = 100
-                                        new = Game()
-                                        new.newround()
+                                        self.newround()
                                     else:
                                         print(self.game_over())
                                         self.player.HP = 0
